@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>
+        <h1>
+            Long before time had a name, the first Spinjutsu master created NINJAGO.
+        </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </p>
+    <button>*creation sound effect*</button>
+    <!--
+    {% for i in list1 %}
+        <p>{{ i }}</p>
+    {% endfor %}
+    -->
+</body>
+</html>
