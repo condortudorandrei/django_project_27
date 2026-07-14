@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookForm
 from .models import Book
 
@@ -13,6 +13,16 @@ def home(request: HttpRequest):
 
 # function-based view
 # CRUD: create, read, update, delete
+
+
+def list_books(request: HttpRequest):
+    # trebuie sa listam cartile din baza de date.
+    # accesam cartiile
+    # QuerySet
+    books = Book.objects.all()
+    return render(request, 'books/home.html', context = {"books": books})
+
+
 
 def create_book(request: HttpRequest):
     if request.method == 'POST':
@@ -28,5 +38,13 @@ def create_book(request: HttpRequest):
         form = BookForm()
         list1 = [10, 20, 30, 40, 50]
         return render(request, 'books/book_form.html', context = {'form': form, 'list1': list1})
+
+def delete_book(request: HttpRequest, pk: int):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('home')
+    else:
+        return render(request, 'books/book_confirm_delete.html', context = {'book': book})
 
 
