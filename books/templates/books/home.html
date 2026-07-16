@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Manager 0.0.1</title>
-</head>
-<body>
+
+
+{% extends "books/base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
     <!-- Cod html Semantic -->
-    <a href="{% url 'create_book' %}" >Create Book</a>
     <ul>
         {% for b in books %}
             <li>{{ b.title }} -- {{ b.author }} <a href="{% url 'delete_book' b.pk %}">ඞ</a> </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
