@@ -11,6 +11,7 @@ from .models import Book
 def home(request: HttpRequest):
     return HttpResponse('Ai carte, ai parte')
 
+
 # function-based view
 # CRUD: create, read, update, delete
 
@@ -19,9 +20,18 @@ def list_books(request: HttpRequest):
     # trebuie sa listam cartile din baza de date.
     # accesam cartiile
     # QuerySet
-    books = Book.objects.all()
-    return render(request, 'books/home.html', context = {"books": books})
 
+    sort = request.GET.get("sort")
+    books = Book.objects.all().order_by("pk")
+
+    if sort == "asc":
+        books = Book.objects.all().order_by("title")
+    if sort == "desc":
+        books = Book.objects.all().order_by("-title")
+    if sort == "default":
+        books = Book.objects.all().order_by("pk")
+
+    return render(request, 'books/home.html', context={"books": books})
 
 
 def create_book(request: HttpRequest):
@@ -37,7 +47,8 @@ def create_book(request: HttpRequest):
         # in cazul asta, request-ul poate fi GET, PUT, PATCH, DELETE, etc
         form = BookForm()
         list1 = [10, 20, 30, 40, 50]
-        return render(request, 'books/book_form.html', context = {'form': form, 'list1': list1})
+        return render(request, 'books/book_form.html', context={'form': form, 'list1': list1})
+
 
 def delete_book(request: HttpRequest, pk: int):
     book = get_object_or_404(Book, pk=pk)
@@ -45,7 +56,8 @@ def delete_book(request: HttpRequest, pk: int):
         book.delete()
         return redirect('home')
     else:
-        return render(request, 'books/book_confirm_delete.html', context = {'book': book})
+        return render(request, 'books/book_confirm_delete.html', context={'book': book})
+
 
 def update_book(request: HttpRequest, pk: int):
     book = get_object_or_404(Book, pk=pk)
@@ -62,4 +74,4 @@ def update_book(request: HttpRequest, pk: int):
         # in cazul asta, request-ul poate fi GET, PUT, PATCH, DELETE, etc
         form = BookForm(instance=book)
         list1 = [10, 20, 30, 40, 50]
-        return render(request, 'books/update_book_form.html', context = {'form': form})
+        return render(request, 'books/update_book_form.html', context={'form': form})
