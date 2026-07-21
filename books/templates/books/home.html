@@ -10,7 +10,11 @@ Home
     <!-- Cod html Semantic -->
     <ul>
         {% for b in books %}
-            <li>{{ b.title }} -- {{ b.author }} <a href="{% url 'delete_book' b.pk %}">ඞ</a> </li>
+            <li>{{ b.title }} -- {{ b.author }}
+                <a href="{% url 'delete_book' b.pk %}">🗑️</a>
+                <a href="{% url 'update_book' b.pk %}">ඞ</a>
+            </li>
         {% endfor %}
     </ul>
+
 {% endblock %}
