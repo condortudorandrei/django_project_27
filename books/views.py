@@ -24,12 +24,16 @@ def list_books(request: HttpRequest):
     sort = request.GET.get("sort")
     books = Book.objects.all().order_by("pk")
 
-    if sort == "asc":
+    if sort == "title=asc":
         books = Book.objects.all().order_by("title")
-    if sort == "desc":
+    if sort == "title=desc":
         books = Book.objects.all().order_by("-title")
     if sort == "default":
         books = Book.objects.all().order_by("pk")
+    if sort == "author=desc":
+        books = Book.objects.all().order_by("-author")
+    if sort == "author=asc":
+        books = Book.objects.all().order_by("author")
 
     return render(request, 'books/home.html', context={"books": books})
 
