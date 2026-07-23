@@ -46,7 +46,7 @@ def create_book(request: HttpRequest):
             # aici se creeaza un book in baza de date!
             book_instance.save()
             return redirect('create_book')
-        # return HttpResponse('ÜBERRASCHUNG MOTHERFUCKER!')
+        # return HttpResponse('ÜBERRASCHUNG!')
     else:
         # in cazul asta, request-ul poate fi GET, PUT, PATCH, DELETE, etc
         form = BookForm()
@@ -73,7 +73,7 @@ def update_book(request: HttpRequest, pk: int):
             # aici se updateaza un book in baza de date!
             book_instance.save()
             return redirect('home')
-        # return HttpResponse('ÜBERRASCHUNG MOTHERFUCKER!')
+        # return HttpResponse('ÜBERRASCHUNG!')
     else:
         # in cazul asta, request-ul poate fi GET, PUT, PATCH, DELETE, etc
         form = BookForm(instance=book)
