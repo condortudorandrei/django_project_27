@@ -12,19 +12,22 @@
 
 <body>
 
-    <nav>
+    <nav class="main-nav">
+        <div>
+            <a href="{% url 'home' %}" >Home</a>
+            <a href="{% url 'create_book' %}" >Create Book</a>
+        </div>
 
-        <a href="{% url 'home' %}" >Home</a>
-        <a href="{% url 'create_book' %}" >Create Book</a>
+        <div>
+            {% if user.is_authenticated %}
+            <span>Welcome, {{user.username}}</span>
+            <a href="{% url 'logout' %}" >Logout</a>
+            {% else %}
 
-        {% if user.is_authenticated %}
-        <span>Welcome, {{user.username}}</span>
-        <a href="{% url 'logout' %}" >Logout</a>
-        {% else %}
-
-        <a href="{% url 'login' %}" >Login</a>
-        <a href="{% url 'register' %}" >Register</a>
-        {% endif %}
+            <a href="{% url 'login' %}" >Login</a>
+            <a href="{% url 'register' %}" >Register</a>
+            {% endif %}
+        </div>
     </nav>
 
     {% block content %} {% endblock %}
