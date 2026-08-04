@@ -63,7 +63,7 @@ def list_user_books(request: HttpRequest, user_pk: int):
 def create_book(request: HttpRequest):
     if request.method == 'POST':
         # detaliile book-ului care au fost trimise de form folosind HTTP POST request, se afla in request.POST ca un dictionar.
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             # aici se creeaza un book in baza de date!
             book = form.save(commit=False)
@@ -97,7 +97,7 @@ def update_book(request: HttpRequest, pk: int):
     # book = Book.objects.get(pk=pk)
         if request.method == 'POST':
             # detaliile book-ului care au fost trimise de form folosind HTTP POST request, se afla in request.POST ca un dictionar.
-            book_instance = BookForm(request.POST, instance=book)
+            book_instance = BookForm(request.POST, request.FILES, instance=book)
             if book_instance.is_valid():
                 # aici se updateaza un book in baza de date!
                 book_instance.save()

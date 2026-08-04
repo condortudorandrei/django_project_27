@@ -36,3 +36,8 @@ nav {
     display:flex;
     justify-content: space-between;
 }
+
+.cover_image{
+    max-width: 300px !important;
+    max-height: 300px !important;
+}

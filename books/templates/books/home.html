@@ -38,8 +38,11 @@ Home
 
     <ul>
         {% for b in books %}
-            <li>{{ b.title }} -- {{ b.author }}
-                <a href="{% url 'list_user_books' b.user.pk %}" > User: {{ b.user.username }}</a>
+            <li>"{{ b.title }}" - written by - "{{ b.author }}"
+                <a href="{% url 'list_user_books' b.user.pk %}"> User: {{ b.user.username }}</a>
+                {% if b.cover_image %}
+                    <img class="cover_image" src="{{ b.cover_image.url }}">
+                {% endif %}
                 {% if user.is_authenticated and user.pk == b.user.pk  %}
                     <a href="{% url 'delete_book' b.pk %}">🗑️</a>
                     <a href="{% url 'update_book' b.pk %}">ඞ</a>
