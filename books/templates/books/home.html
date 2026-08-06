@@ -36,19 +36,49 @@ Home
     </script>
 
 
-    <ul>
+    <div class="books-list">
         {% for b in books %}
-            <li>"{{ b.title }}" - written by - "{{ b.author }}"
-                <a href="{% url 'list_user_books' b.user.pk %}"> User: {{ b.user.username }}</a>
+            <div class="book-card">
+
+
                 {% if b.cover_image %}
                     <img class="cover_image" src="{{ b.cover_image.url }}">
+                {% else %}
+                    <img class="cover_image" src="/media/images/default.jpg">
                 {% endif %}
-                {% if user.is_authenticated and user.pk == b.user.pk  %}
-                    <a href="{% url 'delete_book' b.pk %}">🗑️</a>
-                    <a href="{% url 'update_book' b.pk %}">ඞ</a>
-                {% endif %}
-            </li>
+
+                <div class="card-content">
+
+                    <h4>"{{ b.title }}"</h4>
+
+                    <p>"{{ b.author }}"</p>
+
+                </div>
+
+                <div class="card-buttons">
+                    <a href="{% url 'list_user_books' b.user.pk %}"> User: {{ b.user.username }}</a>
+                    <div>
+                        {% if user.is_authenticated and user.pk == b.user.pk  %}
+                        <a href="{% url 'delete_book' b.pk %}">🗑️</a>
+                        <a href="{% url 'update_book' b.pk %}">ඞ</a>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}

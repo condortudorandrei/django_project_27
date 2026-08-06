@@ -9,11 +9,14 @@ Confirm Book Delete
 {% block content %}
     <p> Are you sure you want to delete this book? </p>
     <p>{{ book }}</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes</button>
 
-    </form>
+    <div class="choices">
+        <form method="post">
+            {% csrf_token %}
+            <button class="delete-choice" type="submit">Yes</button>
+        </form>
 
-    <a class="cancel-delete" href="{% url 'home' %}">No, gotta go back, back to the past, Samurai Jack</a>
+        <button class="delete-choice" onclick=" window.location= '/' ">No</button>
+    </div>
+
 {% endblock %}

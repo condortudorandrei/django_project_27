@@ -1,6 +1,7 @@
 
 html {
     background: url(https://gifdb.com/images/high/speedy-spinning-gray-fish-umqmj8y1qgpfh5d7.webp)
+
 }
 
 
@@ -23,7 +24,7 @@ li {
     display: inline-block;
     max-width: 100%;
     border-radius: var(--standard-border-radius);
-    width: 90px;
+    width: 45px;
 }
 
 nav {
@@ -37,7 +38,75 @@ nav {
     justify-content: space-between;
 }
 
+.books-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+    justify-content: center;
+}
+
+h4{
+    text-align: center;
+    color: white;
+}
+p{
+    text-align: center;
+    color: gray;
+}
+
+.book-card{
+    border: 1px solid gray;
+    width: 200px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
 .cover_image{
-    max-width: 300px !important;
-    max-height: 300px !important;
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover;
+}
+
+.card-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center; !important;
+    padding: 0px 10px 0px 10px;
+}
+
+.card-content > * {
+    margin: 0px;
+}
+
+.card-buttons{
+
+    border: 1px gray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+
+.card-buttons * {
+    text-decoration: none;
+
+}
+
+.choices{
+    padding: 50px;
+    display: flex;
+    gap: 10px;
+}
+
+.delete-choice {
+    width: 50px;
 }
