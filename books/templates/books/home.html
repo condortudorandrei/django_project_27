@@ -44,14 +44,14 @@ Home
                 {% if b.cover_image %}
                     <img class="cover_image" src="{{ b.cover_image.url }}">
                 {% else %}
-                    <img class="cover_image" src="/media/images/default.jpg">
+                    <img class="cover_image" src="/media/images/default.webp">
                 {% endif %}
 
                 <div class="card-content">
 
                     <h4>"{{ b.title }}"</h4>
 
-                    <p>"{{ b.author }}"</p>
+                    <p>{{ b.author }}</p>
 
                 </div>
 
