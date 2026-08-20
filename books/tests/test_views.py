@@ -1,6 +1,7 @@
 import pytest
 from django.contrib.auth import get_user_model
 from django.test.client import Client
+from django.urls import reverse
 from pytest_django import fixtures
 
 from books.models import Book
@@ -87,3 +88,18 @@ def test_delete_book(user, book, logged_in_client: Client):
 
     response = logged_in_client.post(f"/delete_book/{book.pk}/")
     assert response.status_code == 404
+
+def test_api_get_books(logged_in_client: Client, book):
+    url = "/api/v1/books/"
+    # url_1 = reverse("api_book_list", kwargs={"pk": book.pk})
+    response = logged_in_client.get(url)
+    json_response = response.json()
+    assert response.status_code == 200
+    assert json_response[0]["id"] == book.pk
+
+def test_api_get_one_book(logged_in_client: Client, book):
+    url_1 = f"/api/v1/books/{book.pk}/"
+    response = logged_in_client.get(url_1)
+    json_response = response.json()
+    assert response.status_code == 200
+    assert json_response["id"] == book.pk

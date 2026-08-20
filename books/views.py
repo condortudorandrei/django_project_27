@@ -80,7 +80,6 @@ def create_book(request: HttpRequest):
 @login_required
 def delete_book(request: HttpRequest, pk: int):
     book = get_object_or_404(Book, pk=pk)
-
     if request.user.pk == book.user.pk:
         if request.method == 'POST':
             book.delete()
