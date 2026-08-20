@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookForm
 from .models import Book
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -69,6 +70,8 @@ def create_book(request: HttpRequest):
             book = form.save(commit=False)
             book.user = request.user
             book.save()
+            # notify user that a book has been created
+            messages.success(request, f'Book {book.title} was created successfully')
             return redirect('create_book')
         # return HttpResponse('ÜBERRASCHUNG!')
     else:
@@ -83,6 +86,7 @@ def delete_book(request: HttpRequest, pk: int):
     if request.user.pk == book.user.pk:
         if request.method == 'POST':
             book.delete()
+            messages.success(request, f'Book {book.title} was deleted successfully')
             return redirect('home')
         else:
             return render(request, 'books/book_confirm_delete.html', context={'book': book})
