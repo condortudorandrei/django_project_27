@@ -67,10 +67,11 @@ p{
 }
 
 
-.cover_image{
+.cover-image{
     width: 200px !important;
     height: 200px !important;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .card-content{

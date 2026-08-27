@@ -9,6 +9,8 @@ urlpatterns = [
     path("delete_book/<int:pk>/", views.delete_book, name='delete_book'),
     path("update_book/<int:pk>/", views.update_book, name='update_book'),
     path("user/<int:user_pk>/books/", views.list_user_books, name='list_user_books'),
+    path("book/<int:book_pk>/", views.view_book, name='view_book'),
+    path("book/<int:book_pk>/comments/", views.add_comment, name='add_comment'),
     path("api/v1/books/", api_views.api_book_list, name='api_book_list'),
     path("api/v1/books/<int:pk>/", api_views.api_book_detail, name='api_book_detail'),
 

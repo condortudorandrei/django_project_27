@@ -1,0 +1,38 @@
+
+
+{% extends "books/base.html" %}
+
+{% block title %}
+{{ book.title }}
+{% endblock %}
+
+{% block content %}
+        <h1>
+            Details:
+        </h1>
+        <p>
+            Title: {{ book.title }}
+        </p>
+        <p>
+            Author: {{book.author }}
+        </p>
+        <div class="comments">
+            {% for c in comments.all %}
+                <div class="comment">
+                    <p>{{ c.text }}</p>
+                    <span class="comment-meta">{{ c.created_at|date:"H:i, d M, Y" }}</span>
+                    <strong>{{ c.user.username }}</strong>
+                </div>
+            {% endfor %}
+        </div>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'add_comment' book.pk %}">
+                {% csrf_token %}
+                <textarea name="text" rows="3" placeholder="Leave a comment: "></textarea>
+                <button type="submit">Comment</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Log in to comment</a>
+        {% endif %}
+
+{% endblock %}

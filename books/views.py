@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import BookForm
+from .forms import BookForm, CommentForm
 from .models import Book
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -112,3 +112,25 @@ def update_book(request: HttpRequest, pk: int):
             list1 = [10, 20, 30, 40, 50]
             return render(request, 'books/update_book_form.html', context={'form': form})
     return HttpResponse("Fuck you")
+
+def view_book(request: HttpRequest, book_pk: int):
+    book = get_object_or_404(Book, pk=book_pk)
+    comments = book.comments
+    return render(request, 'books/book.html', context={"book": book, "comments": comments})
+
+
+@login_required
+def add_comment(request: HttpRequest, book_pk: int):
+    book = get_object_or_404(Book, pk=book_pk)
+    user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = user
+            comment.book = book
+            comment.save()
+            messages.success(request, f'Comment was posted successfully')
+            return redirect('home')
+    return redirect('home')
+

@@ -42,9 +42,9 @@ Home
 
 
                 {% if b.cover_image %}
-                    <img class="cover_image" src="{{ b.cover_image.url }}">
+                    <img class="cover-image" src="{{ b.cover_image.url }}" onclick="window.location = '{% url 'view_book' b.pk %}'" >
                 {% else %}
-                    <img class="cover_image" src="/media/images/default.webp">
+                    <img class="cover-image" src="/media/images/default.webp" onclick="window.location = '{% url 'view_book' b.pk %}'" >
                 {% endif %}
 
                 <div class="card-content">
